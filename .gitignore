@@ -1,0 +1,7 @@
+.venv
+./**/*.csv
+./**/*.zip
+labs/cleaned_employees.csv
+labs/employees.csv
+labs/diabetes.csv
+labs/diabities.zip
