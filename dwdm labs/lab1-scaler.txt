@@ -1,0 +1,74 @@
+# 1.1 Implementation of Standard scaler
+# import numpy as np
+import pandas as pd
+
+class StandardNorm:
+    def scale(self,d):
+        for i in d.columns:
+            mean=d[i].mean()
+            sd=d[i].std()
+            d[i]=(d[i]-mean)/sd
+        return d
+
+# Driver Code
+data = pd.DataFrame([[45000,42],[32000,26],[58000,48],[37000,32]], columns=['Salary', 'Age'])
+print('Original Data')
+print(data)
+s=StandardNorm()
+df=s.scale(data)
+print('\nScaled Data')
+print(df)
+
+
+
+# 1.2 Implementation of min-max scaler
+import pandas as pd
+
+class MinMaxNorm:
+    def scale(self,d):
+        for i in d.columns:
+            min=d[i].min()
+            max=d[i].max()
+            d[i]=(d[i]-min)/(max-min)
+        return d
+
+# Driver Code
+data = pd.DataFrame([[45000,42],[32000,26],[58000,48],[37000,32]], columns=['Salary', 'Age'])
+print('Original Data')
+print(data)
+s=MinMaxNorm()
+df=s.scale(data)
+print('\nScaled Data')
+print(df)
+
+
+
+# 1.3 Implementation of Standard scaler using library
+# import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+
+# Driver Code
+data = pd.DataFrame([[45000,42],[32000,26],[58000,48],[37000,32]], columns=['Salary', 'Age'])
+print('Original Data')
+print(data)
+ss=StandardScaler()
+d=ss.fit_transform(data)
+print('Normalized Data')
+print(d)
+
+
+
+# 1.4 Implementation of min-max scaler using library
+from sklearn.preprocessing import MinMaxScaler
+
+# Driver Code
+data = pd.DataFrame([[45000,42],[32000,26],[58000,48],[37000,32]], columns=['Salary', 'Age'])
+print('Original Data')
+print(data)
+ms=MinMaxScaler()
+d=ms.fit_transform(data)
+print('Normalized Data')
+print(d)
+
+

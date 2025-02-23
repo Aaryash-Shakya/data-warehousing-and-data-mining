@@ -1,0 +1,50 @@
+import numpy as np
+import pandas as pd
+data = pd.read_csv('employees.csv')
+print('original data')
+print(data)
+
+# Removing tuples with missing values
+data = data.dropna(axis=0)
+
+# Removing duplicate rows
+data = data.drop_duplicates(keep='first')
+
+# Remove column Bonus %
+del data['Bonus %']
+
+# Correcting INconsistencies among values
+data['Team'] = data['Team'].str.replace('Fin', 'Finance')
+data['Team'] = data['Team'].str.replace('Mkt', 'Marketing')
+data['Team'] = data['Team'].str.replace('Financeance', 'Finance')
+
+print("Cleaned data")
+print(data[0:15])
+
+data.to_csv('cleaned_employees.csv', index=False)
+
+
+
+
+'''
+Lab 2.2: Data Cleaning
+Replacing missing values by mean or interpolated value
+'''
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv('employees.csv')
+print('original data')
+print(data)
+
+# Filling missing values with mean
+data['Salary'] = data['Salary'].fillna(data['Salary'].mean())
+print('Cleaned data (mean)')
+print(data[0:15])
+
+data = pd.read_csv('employees.csv')
+# Filling missing values with interpolated value
+data['Salary'] = data['Salary'].interpolate(method='linear')
+# data['First Name'].fillna("Unknown", inplace=True)
+print('Cleaned data (interpolation)')
+print(data[0:15])

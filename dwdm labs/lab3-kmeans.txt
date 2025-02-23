@@ -1,0 +1,58 @@
+'''
+1. Write a python program to implement K-means clustering algorithm.
+    Generate 3 sets of 100 2-D 
+'''
+# K-means Clustering
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+d1 = np.random.multivariate_normal([10,8], [[1,2],[2,1]], 100).round(0)
+d2 = np.random.multivariate_normal([20,25], [[1,1.5],[1.5,1]], 100).round(0)
+d3 = np.random.multivariate_normal([15,16], [[1,2.5],[2.5,1]], 100).round(0)
+
+data = np.concatenate((d1, d2, d3),0)
+# print(len(data))
+
+km = KMeans(n_clusters=3, init='random')
+km.fit(data)
+centers = km.cluster_centers_
+labels = km.labels_
+print("Cluster Centers: ", *centers)
+print("Cluster Labels: ", *labels)
+
+colors = ['r', 'g', 'b']
+markers = ["+", "x", "*"]
+for i in range(len(data)):
+    plt.plot(data[i][0], data[i][1], color=colors[labels[i]], marker=markers[labels[i]])
+plt.scatter(centers[:,0], centers[:,1], marker='o', s=50, linewidths=5)
+plt.show()
+
+
+
+
+# K-means Clustering
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+d1 = np.random.multivariate_normal([10,8], [[1,2],[2,1]], 100).round(0)
+d2 = np.random.multivariate_normal([20,25], [[1,1.5],[1.5,1]], 100).round(0)
+d3 = np.random.multivariate_normal([15,16], [[1,2.5],[2.5,1]], 100).round(0)
+
+data = np.concatenate((d1, d2, d3),0)
+# print(len(data))
+
+km = KMeans(n_clusters=3, init='k-means++')
+km.fit(data)
+centers = km.cluster_centers_
+labels = km.labels_
+print("Cluster Centers: ", *centers)
+print("Cluster Labels: ", *labels)
+
+colors = ['r', 'g', 'b']
+markers = ["+", "x", "*"]
+for i in range(len(data)):
+    plt.plot(data[i][0], data[i][1], color=colors[labels[i]], marker=markers[labels[i]])
+plt.scatter(centers[:,0], centers[:,1], marker='o', s=25, linewidths=5)
+plt.show()
